@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,6 +10,7 @@ public class FruitManager: MonoBehaviour
     [SerializeField] private FruitHolder fruitHolder;
     [SerializeField] private float tossFruitForce = 100f;
     [SerializeField] private float tossFruitTorque = 1;
+    [SerializeField] private float timeBetweenSpawnFruit = 1f;
 
     [SerializeField] private Bounds bounds = new Bounds(new Vector3(0f, 4f, 0f), new Vector3(4f, 0f, 0f));
 
@@ -16,6 +18,8 @@ public class FruitManager: MonoBehaviour
     {
         fruitHolder = (FruitHolder)FindAnyObjectByType(typeof(FruitHolder));
         fruitHolder.Clear();
+        StartCoroutine(TimerForSpawnFruit());
+
     }
 
     public void Update()
@@ -27,7 +31,20 @@ public class FruitManager: MonoBehaviour
                 Vector3.zero);
 
             TossFruit(fruit);
-}
+        }
+    }
+
+    public IEnumerator TimerForSpawnFruit()
+    {
+        while (true)
+        {
+            var fruit = fruitHolder.SpawnFruit(
+                fruitPrefabs[Random.Range(0, fruitPrefabs.Count)],
+                Vector3.zero);
+            TossFruit(fruit);
+
+            yield return new WaitForSeconds(timeBetweenSpawnFruit);
+        }
     }
 
     public void TossFruit(Fruit fruit)

@@ -3,41 +3,30 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
+    [SerializeField] private FruitParticleManager _particleManager;
     [SerializeField] private WholeFruit _wholeFruit;
     [SerializeField] private SlicedFruit _slicedFruit;
-    [SerializeField] private float _sliceForce = 100f;
+
     [SerializeField] private bool isSliced = false;
 
     private void OnEnable()
     {
         Reset();
+        _particleManager = GetComponent<FruitParticleManager>();
     }
 
     void Update()
     {
-        if (!isSliced)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                SliceFruit();
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            _wholeFruit.Reset();
-            _slicedFruit.Deactivate();
-        }
-
         CheckHeight();
     }
 
-    public void SliceFruit()
+    public void SliceFruit(Vector3 direction, float sliceForce, float sliceTorque)
     {
-        var x = Random.Range(-1f, 1f);
-        var y = Random.Range(-1f, 1f);
+        if (isSliced) return;
+
+        _particleManager.CreateParticles(_wholeFruit.transform.position);
         _wholeFruit.Deactivate();
-        _slicedFruit.Activate(_wholeFruit.transform.position, new Vector2(x, y), _sliceForce);
+        _slicedFruit.Activate(_wholeFruit.transform.position, direction, sliceForce, sliceTorque);
         isSliced = true;
     }
 

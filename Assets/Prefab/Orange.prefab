@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1440843417916791317}
   - component: {fileID: 8492286118669889725}
+  - component: {fileID: 9117981127241055159}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Untagged
@@ -94,9 +95,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wholeFruit: {fileID: 1973293193136696653}
+  _particleManager: {fileID: 0}
   _slicedFruit: {fileID: 6801101520369867732}
   _sliceForce: 150
+  _sliceTorque: 100
   isSliced: 0
+--- !u!114 &9117981127241055159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7755047667881703123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dcc5bb555dd4f049bfdd9e30243ddf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 0}
+  _color: {r: 0.7058824, g: 0.14901961, b: 0, a: 1}
 --- !u!1 &9109992354242457453
 GameObject:
   m_ObjectHideFlags: 0
