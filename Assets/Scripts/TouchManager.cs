@@ -6,7 +6,8 @@ public class TouchManager : MonoBehaviour
     [SerializeField] private float _sliceForce = 100f;
     [SerializeField] private float _sliceTorque = 100f;
 
-    [SerializeField] private LayerMask mask;
+    [SerializeField] private LayerMask fruitMask;
+    [SerializeField] private LayerMask bombMask;
     private RaycastHit hit;
     private Vector3 lastMousePosition;
 
@@ -30,11 +31,10 @@ public class TouchManager : MonoBehaviour
 
             var direction = (new Vector3(ray.origin.x, ray.origin.y) - lastMousePosition).normalized;
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) 
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, fruitMask | bombMask)) 
             {
-                var fruit = hit.rigidbody.gameObject.GetComponentInParent<Fruit>();
-
-                fruit.SliceFruit(direction, _sliceForce, _sliceTorque);
+                var hitObject = hit.rigidbody.gameObject;
+                CollisionEvent(hitObject, direction);
             };
 
             var pos = ray.origin;
@@ -44,5 +44,28 @@ public class TouchManager : MonoBehaviour
             _trailRenderer.transform.position = mouseWorldPosition;
             lastMousePosition = pos;
         }
+    }
+
+    public void CollisionEvent(GameObject gameObject, Vector3 sliceDirection)
+    {
+        if((fruitMask & 1 << gameObject.layer) != 0)
+        {
+            SliceFruitEvent(gameObject, sliceDirection);
+        }
+        else if((bombMask & 1 << gameObject.layer) != 0)
+        {
+            SliceBombEvent(gameObject, sliceDirection);
+        }
+    }
+
+    public void SliceFruitEvent(GameObject gameObject, Vector3 sliceDirection)
+    {
+        var fruit = gameObject.GetComponentInParent<Fruit>();
+        fruit.SliceFruit(sliceDirection, _sliceForce, _sliceTorque);
+    }
+
+    public void SliceBombEvent(GameObject gameObject, Vector3 sliceDirection)
+    {
+        Debug.Log("Game over");
     }
 }

@@ -4,33 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class FruitManager: MonoBehaviour
-{
-    [SerializeField] private List<GameObject> fruitPrefabs;
-    [SerializeField] private FruitHolder fruitHolder;
-    [SerializeField] private float tossFruitForce = 100f;
-    [SerializeField] private float tossFruitTorque = 1;
-    [SerializeField] private float timeBetweenSpawnFruit = 1f;
+public delegate void FruitManagerEvent();
 
-    [SerializeField] private Bounds bounds = new Bounds(new Vector3(0f, 4f, 0f), new Vector3(4f, 0f, 0f));
+public class FruitManager: MonoBehaviour 
+{
+    public FruitManagerEvent OnMissFruit;
+
+    [SerializeField] private List<GameObject> fruitPrefabs;
+    [SerializeField] private CacheObjectHolder cacheObjectHolder;
+    [SerializeField] private Thrower thrower;
+    
+    [SerializeField] private float timeBetweenSpawnFruit = 1f;
 
     public void OnEnable()
     {
-        fruitHolder = (FruitHolder)FindAnyObjectByType(typeof(FruitHolder));
-        fruitHolder.Clear();
+        cacheObjectHolder = (CacheObjectHolder)CacheObjectHolder.Instance;
+        thrower = (Thrower)Thrower.Instance;
+        //cacheObjectHolder.Clear();
         StartCoroutine(TimerForSpawnFruit());
-
     }
 
     public void Update()
     {
         if (Input.GetKeyUp(KeyCode.Space)) 
         {
-            var fruit = fruitHolder.SpawnFruit(
-                fruitPrefabs[Random.Range(0, fruitPrefabs.Count)], 
-                Vector3.zero);
-
-            TossFruit(fruit);
+            SpawnFruit();
         }
     }
 
@@ -38,25 +36,25 @@ public class FruitManager: MonoBehaviour
     {
         while (true)
         {
-            var fruit = fruitHolder.SpawnFruit(
-                fruitPrefabs[Random.Range(0, fruitPrefabs.Count)],
-                Vector3.zero);
-            TossFruit(fruit);
-
+            SpawnFruit();
             yield return new WaitForSeconds(timeBetweenSpawnFruit);
         }
     }
 
-    public void TossFruit(Fruit fruit)
+    public void SpawnFruit()
     {
-        var torqueDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
-        var x = Random.Range(bounds.min.x, bounds.max.x);
-        var startPos = Vector3.right * x;
+        var cacheObject = cacheObjectHolder.GetCacheObject(
+        fruitPrefabs[Random.Range(0, fruitPrefabs.Count)],
+        Vector3.zero);
 
+        var fruit = (Fruit)cacheObject;
+        fruit.OnWholeFruitFall += MissFruit;
 
-
-        fruit.TossFruit(startPos, (bounds.center - startPos).normalized * tossFruitForce, torqueDirection * tossFruitTorque);
-
+        thrower.Throw(fruit.WholeFruit.Rigidbody);
     }
 
+    public void MissFruit()
+    {
+        OnMissFruit.Invoke();
+    }
 }

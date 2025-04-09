@@ -2,11 +2,10 @@
 
 public class SlicedFruit: MonoBehaviour
 {
-
     [SerializeField] private Rigidbody _leftSlice;
     [SerializeField] private Rigidbody _rightSlice;
 
-    public void Activate(Vector3 newPosition, Vector3 direction, float force, float torque)
+    public void Slice(Vector3 newPosition, Vector3 direction, float force, float torque)
     {
         gameObject.SetActive(true);
 
@@ -25,8 +24,11 @@ public class SlicedFruit: MonoBehaviour
         _leftSlice.AddForce(-_leftSlice.transform.right * force);
         _rightSlice.AddForce(-_rightSlice.transform.right * force);
 
-        _leftSlice.AddTorque(-_leftSlice.transform.right + -_leftSlice.transform.forward * torque);
-        _rightSlice.AddTorque(-_rightSlice.transform.right + -_rightSlice.transform.forward * torque);
+        //_leftSlice.AddTorque(-_leftSlice.transform.right + -_leftSlice.transform.forward * torque);
+        //_rightSlice.AddTorque(-_rightSlice.transform.right + -_rightSlice.transform.forward * torque);
+
+        _leftSlice.AddTorque((_leftSlice.transform.up + _leftSlice.transform.forward) * torque);
+        _rightSlice.AddTorque((_rightSlice.transform.up + _rightSlice.transform.forward) * torque);
     }
 
     public void Reset()

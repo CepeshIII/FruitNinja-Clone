@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WholeFruit : MonoBehaviour
+public class Bomb : MonoBehaviour, ICacheObject
 {
     [SerializeField] private Rigidbody _rigidbody;
 
@@ -11,17 +11,22 @@ public class WholeFruit : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Activate()
+    private void Update()
     {
-        gameObject.SetActive(true);
+        CheckHeight();
     }
 
-    public void Activate(Vector3 position, Vector3 force, Vector3 torque)
+    public void CheckHeight()
     {
-        gameObject.SetActive(true);
+        if (transform.position.y < -1f) Deactivate();
+    }
 
-        _rigidbody.transform.position = position;
-        AddForce(force, torque);
+    public void Activate(string name, Vector3 position)
+    {
+        gameObject.name = name;
+        transform.position = position;
+        gameObject.SetActive(true);
+        Reset();
     }
 
     public void Reset()
@@ -37,19 +42,16 @@ public class WholeFruit : MonoBehaviour
     public void Deactivate()
     {
         gameObject.SetActive(false);
+        Reset();
     }
 
-    public bool CheckIfLowerThanHeight(float y)
+    public void Destroy()
     {
-        if (_rigidbody.transform.position.y < y) return true;
-        return false;
+        Destroy(gameObject);
     }
 
-
-    public void AddForce(Vector3 force, Vector3 torque)
+    public bool IsActive()
     {
-        _rigidbody.AddForce(force);
-        _rigidbody.AddTorque(torque);
+        return gameObject.activeSelf;
     }
-
 }
