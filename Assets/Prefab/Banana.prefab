@@ -231,9 +231,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7237907904332245109}
   - component: {fileID: 7237907904322455445}
-  - component: {fileID: 5858663958283497317}
   - component: {fileID: 5260580530961003807}
   - component: {fileID: 6587434772026412767}
+  - component: {fileID: 8770448506961317544}
   m_Layer: 6
   m_Name: Banana
   m_TagString: Untagged
@@ -279,19 +279,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5858663958283497317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7237907904331822165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d687cc63b84709f4b88fb2d0f9e5128e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
 --- !u!135 &5260580530961003807
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -340,6 +327,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8770448506961317544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237907904331822165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981e74aae1de339409c26c38342a1248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 0}
 --- !u!1 &7755047667881703123
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,11 +387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb6adc2c5dc87848836b6824e632ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wholeFruit: {fileID: 5858663958283497317}
   _particleManager: {fileID: 0}
+  _wholeFruit: {fileID: 8770448506961317544}
   _slicedFruit: {fileID: 6801101520369867732}
-  _sliceForce: 150
-  _sliceTorque: 100
   isSliced: 0
 --- !u!114 &5384666918591629176
 MonoBehaviour:

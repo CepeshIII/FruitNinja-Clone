@@ -1,7 +1,11 @@
 using UnityEngine;
 
+public delegate void TouchManagerEvent();
+
 public class TouchManager : MonoBehaviour
 {
+    public TouchManagerEvent OnBombTouch;
+
     [SerializeField] private TrailRenderer _trailRenderer;
     [SerializeField] private float _sliceForce = 100f;
     [SerializeField] private float _sliceTorque = 100f;
@@ -66,6 +70,6 @@ public class TouchManager : MonoBehaviour
 
     public void SliceBombEvent(GameObject gameObject, Vector3 sliceDirection)
     {
-        Debug.Log("Game over");
+        OnBombTouch?.Invoke();
     }
 }
