@@ -70,6 +70,8 @@ public class TouchManager : MonoBehaviour
 
     public void SliceBombEvent(GameObject gameObject, Vector3 sliceDirection)
     {
+        var bomb = gameObject.GetComponentInParent<Bomb>();
+        bomb.TriggerBomb();
         OnBombTouch?.Invoke();
     }
 }

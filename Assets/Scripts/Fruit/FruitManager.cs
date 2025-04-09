@@ -9,10 +9,12 @@ public delegate void FruitManagerEvent();
 public class FruitManager: MonoBehaviour 
 {
     public FruitManagerEvent OnMissFruit;
+    public FruitManagerEvent OnFruitSlice;
 
     [SerializeField] private List<GameObject> fruitPrefabs;
     [SerializeField] private CacheObjectHolder cacheObjectHolder;
     [SerializeField] private Thrower thrower;
+    [SerializeField] private SoundManager soundManager;
     
     [SerializeField] private float timeBetweenSpawnFruit = 1f;
 
@@ -20,6 +22,7 @@ public class FruitManager: MonoBehaviour
     {
         cacheObjectHolder = (CacheObjectHolder)CacheObjectHolder.Instance;
         thrower = (Thrower)Thrower.Instance;
+        soundManager = (SoundManager)SoundManager.Instance;
         //cacheObjectHolder.Clear();
         StartCoroutine(TimerForSpawnFruit());
     }
@@ -49,8 +52,14 @@ public class FruitManager: MonoBehaviour
 
         var fruit = (Fruit)cacheObject;
         fruit.OnWholeFruitFall += MissFruit;
+        fruit.OnFruitSlice += SliceFruit;
 
         thrower.Throw(fruit.WholeFruit.Rigidbody);
+    }
+
+    public void SliceFruit()
+    {
+        soundManager.PlayFruitSound();
     }
 
     public void MissFruit()

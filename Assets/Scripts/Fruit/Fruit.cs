@@ -5,6 +5,7 @@ public delegate void FruitEvent();
 public class Fruit : MonoBehaviour, ICacheObject
 {
     public FruitEvent OnWholeFruitFall;
+    public FruitEvent OnFruitSlice;
 
     [SerializeField] private FruitParticleManager _particleManager;
     [SerializeField] private WholeFruit _wholeFruit;
@@ -34,6 +35,7 @@ public class Fruit : MonoBehaviour, ICacheObject
         _wholeFruit.Deactivate();
         _slicedFruit.Slice(_wholeFruit.transform.position, direction, sliceForce, sliceTorque);
         isSliced = true;
+        OnFruitSlice.Invoke();
     }
 
     public void CheckHeight()
@@ -76,6 +78,7 @@ public class Fruit : MonoBehaviour, ICacheObject
         _wholeFruit.Deactivate();
 
         OnWholeFruitFall = null;
+        OnFruitSlice = null;
     }
 
     public void TossFruit(Vector3 startPosition, Vector3 force, Vector3 torque)

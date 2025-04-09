@@ -486,13 +486,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.35355338, y: -0.35355338, z: 0.1464466, w: 0.8535535}
+  m_LocalRotation: {x: 0.05536834, y: -0.28049272, z: 0.28049278, w: 0.91628706}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: -30, z: 30}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,8 +706,9 @@ MonoBehaviour:
   bombPrefabs:
   - {fileID: 1708972135922170576, guid: 260667fb1a21db648aeb1a8694d9d8cf, type: 3}
   cacheObjectHolder: {fileID: 0}
-  timeBetweenSpawn: 3
+  soundManager: {fileID: 0}
   thrower: {fileID: 0}
+  timeBetweenSpawn: 3
 --- !u!1 &1186233546
 GameObject:
   m_ObjectHideFlags: 0
@@ -5890,6 +5891,52 @@ MonoBehaviour:
   bombMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!1 &1853227425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1853227426}
+  - component: {fileID: 1853227427}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1853227426
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853227425}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.9381952, y: 2.3639407, z: 5.8785934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1853227427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853227425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ce0008fe1f39241ade92b66bc0031b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruitSliceAudioResource: {fileID: 6418180475301049370, guid: 487879859b5129746af8ab755efe466d, type: 2}
+  bombExplosionAudioResource: {fileID: 6418180475301049370, guid: 0558090babeb7c64a9136936543d4948, type: 2}
 --- !u!1 &1977832166
 GameObject:
   m_ObjectHideFlags: 0
@@ -5993,7 +6040,7 @@ Transform:
   m_GameObject: {fileID: 1977832166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0.1}
+  m_LocalPosition: {x: 0, y: 4, z: 0.5}
   m_LocalScale: {x: 14.3, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6047,6 +6094,7 @@ MonoBehaviour:
   - {fileID: 7755047667881703123, guid: 52b540eae0c602b4a889e0ef7500d4bf, type: 3}
   cacheObjectHolder: {fileID: 0}
   thrower: {fileID: 0}
+  soundManager: {fileID: 0}
   timeBetweenSpawnFruit: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -6057,12 +6105,13 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1409458150}
   - {fileID: 969437460}
+  - {fileID: 1853227426}
   - {fileID: 1786619187}
   - {fileID: 1079022828}
+  - {fileID: 1269221903}
   - {fileID: 2036618177}
   - {fileID: 798123938}
   - {fileID: 383254178}
   - {fileID: 1977832170}
   - {fileID: 1401730183}
   - {fileID: 1186233549}
-  - {fileID: 1269221903}
