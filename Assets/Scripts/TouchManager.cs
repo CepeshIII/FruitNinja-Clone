@@ -25,6 +25,8 @@ public class TouchManager : MonoBehaviour
 
         if (Input.GetMouseButton(0)) 
         {
+            _trailRenderer.enabled = true;
+
             Camera camera = Camera.main;
 
             var mouseScreenPos = Input.mousePosition;
@@ -47,6 +49,10 @@ public class TouchManager : MonoBehaviour
 
             _trailRenderer.transform.position = mouseWorldPosition;
             lastMousePosition = pos;
+        }
+        else
+        {
+            _trailRenderer.enabled = false;
         }
     }
 
