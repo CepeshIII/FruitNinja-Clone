@@ -6092,6 +6092,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitPrefabs:
   - {fileID: 7755047667881703123, guid: 52b540eae0c602b4a889e0ef7500d4bf, type: 3}
+  - {fileID: 7755047667881703123, guid: 75deb345264c7bb4690c96219ffd70f4, type: 3}
+  - {fileID: 7755047667881703123, guid: 3b0cf8b518b8e774ebbf882a2f6dbde5, type: 3}
   cacheObjectHolder: {fileID: 0}
   thrower: {fileID: 0}
   soundManager: {fileID: 0}
