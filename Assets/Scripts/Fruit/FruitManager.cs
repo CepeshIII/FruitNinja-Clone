@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public delegate void FruitManagerEvent();
@@ -15,7 +16,9 @@ public class FruitManager: MonoBehaviour
     [SerializeField] private CacheObjectHolder cacheObjectHolder;
     [SerializeField] private Thrower thrower;
     [SerializeField] private SoundManager soundManager;
-    
+    [SerializeField] private ScoreManager scoreManager;
+
+
     [SerializeField] private float timeBetweenSpawnFruit = 1f;
 
     public void OnEnable()
@@ -23,6 +26,7 @@ public class FruitManager: MonoBehaviour
         cacheObjectHolder = (CacheObjectHolder)CacheObjectHolder.Instance;
         thrower = (Thrower)Thrower.Instance;
         soundManager = (SoundManager)SoundManager.Instance;
+        scoreManager = (ScoreManager)ScoreManager.Instance;
         //cacheObjectHolder.Clear();
         StartCoroutine(TimerForSpawnFruit());
     }
@@ -60,6 +64,7 @@ public class FruitManager: MonoBehaviour
     public void SliceFruit()
     {
         soundManager.PlayFruitSound();
+        scoreManager.IncreaseScore(1);
     }
 
     public void MissFruit()

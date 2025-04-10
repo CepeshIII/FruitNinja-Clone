@@ -4,19 +4,24 @@ using System.Collections;
 
 public class SceneLoader: Singleton<SceneLoader>
 {
-    public void LoadMenuScene()
+    public void LoadMainMenuScene()
     {
-        StartCoroutine(LoadScene(0));
+        StartCoroutine(LoadScene(0, LoadSceneMode.Single));
     }
 
     public void LoadMainScene()
     {
-        StartCoroutine(LoadScene(1));
+        StartCoroutine(LoadScene(1, LoadSceneMode.Single));
     }
 
-    public IEnumerator LoadScene(int sceneBuildIndex)
+    public void LoadMenuScene()
     {
-        var asyncOperation = SceneManager.LoadSceneAsync(sceneBuildIndex);
+        StartCoroutine(LoadScene(2, LoadSceneMode.Additive));
+    }
+
+    public IEnumerator LoadScene(int sceneBuildIndex, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+    {
+        var asyncOperation = SceneManager.LoadSceneAsync(sceneBuildIndex, loadSceneMode);
 
         if(asyncOperation != null)
         {
