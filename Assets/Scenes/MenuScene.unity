@@ -1755,8 +1755,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: FRUIT SLASH
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4615ff45bed5c80439d0de3f93c14c9d, type: 2}
-  m_sharedMaterial: {fileID: -6781704277549978192, guid: 4615ff45bed5c80439d0de3f93c14c9d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a28c40279115cd44b44d007f78200b9, type: 2}
+  m_sharedMaterial: {fileID: 3361866595884463899, guid: 2a28c40279115cd44b44d007f78200b9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2272,8 +2272,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4615ff45bed5c80439d0de3f93c14c9d, type: 2}
-  m_sharedMaterial: {fileID: -6781704277549978192, guid: 4615ff45bed5c80439d0de3f93c14c9d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a28c40279115cd44b44d007f78200b9, type: 2}
+  m_sharedMaterial: {fileID: 3361866595884463899, guid: 2a28c40279115cd44b44d007f78200b9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2859,8 +2859,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4615ff45bed5c80439d0de3f93c14c9d, type: 2}
-  m_sharedMaterial: {fileID: -6781704277549978192, guid: 4615ff45bed5c80439d0de3f93c14c9d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a28c40279115cd44b44d007f78200b9, type: 2}
+  m_sharedMaterial: {fileID: 3361866595884463899, guid: 2a28c40279115cd44b44d007f78200b9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
