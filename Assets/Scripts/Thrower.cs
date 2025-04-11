@@ -14,11 +14,11 @@ public class Thrower: Singleton<Thrower>
 
     public void Throw(Rigidbody rigidbody)
     {
-        var torqueDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+        var torqueDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         var x = Random.Range(bounds.min.x, bounds.max.x);
 
         var startPos = new Vector3(x, 0f, 0f);
-        var directionToCenterOfBounds = (bounds.center - startPos).normalized;
+        var directionToCenterOfBounds = (Vector3.up + (bounds.center - startPos).normalized * Random.Range(0f, 0.5f)).normalized;
 
         var force = directionToCenterOfBounds * tossFruitForce;
         var torque = torqueDirection * tossFruitTorque;
