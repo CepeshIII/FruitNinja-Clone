@@ -9,6 +9,7 @@ TagManager:
   - MainFruitParticleSystem
   - TouchManager
   - FruitManager
+  - InputManager
   layers:
   - Default
   - TransparentFX

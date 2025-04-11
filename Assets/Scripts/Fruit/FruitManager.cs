@@ -33,10 +33,10 @@ public class FruitManager: MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space)) 
-        {
-            SpawnFruit();
-        }
+        //if (Input.GetKeyUp(KeyCode.Space)) 
+        //{
+        //    SpawnFruit();
+        //}
     }
 
     public IEnumerator TimerForSpawnFruit()

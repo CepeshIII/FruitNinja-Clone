@@ -7,6 +7,7 @@ public class TouchManager : MonoBehaviour
     public TouchManagerEvent OnBombTouch;
 
     [SerializeField] private TrailRenderer _trailRenderer;
+    [SerializeField] private InputManager _inputManager;
     [SerializeField] private float _sliceForce = 100f;
     [SerializeField] private float _sliceTorque = 100f;
 
@@ -15,45 +16,56 @@ public class TouchManager : MonoBehaviour
     private RaycastHit hit;
     private Vector3 lastMousePosition;
 
-    void Start()
+    private void OnEnable()
     {
-        
+        _inputManager = GameObject
+            .FindGameObjectWithTag("InputManager")
+            .GetComponent<InputManager>();
+        _inputManager.OnClick += () => Click(_inputManager.MousePosition);
     }
+
+
+    public void Click(Vector2 position)
+    {
+        _trailRenderer.enabled = true;
+
+        Camera camera = Camera.main;
+
+        Vector3 clickPosition = position;
+        clickPosition.z = -camera.transform.position.z;
+
+        Ray ray = camera.ScreenPointToRay(clickPosition);
+        var mouseWorldPosition = camera.ScreenToWorldPoint(clickPosition);
+
+        var direction = (new Vector3(ray.origin.x, ray.origin.y) - lastMousePosition).normalized;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, fruitMask | bombMask))
+        {
+            var hitObject = hit.rigidbody.gameObject;
+            CollisionEvent(hitObject, direction);
+        };
+
+        var pos = ray.origin;
+        pos.z = 0;
+        mouseWorldPosition.z = 0f;
+
+        _trailRenderer.transform.position = mouseWorldPosition;
+        lastMousePosition = pos;
+        _trailRenderer.enabled = false;
+    }
+
 
     void Update()
     {
 
-        if (Input.GetMouseButton(0)) 
-        {
-            _trailRenderer.enabled = true;
-
-            Camera camera = Camera.main;
-
-            var mouseScreenPos = Input.mousePosition;
-            mouseScreenPos.z = -camera.transform.position.z;
-
-            Ray ray = camera.ScreenPointToRay(mouseScreenPos);
-            var mouseWorldPosition = camera.ScreenToWorldPoint(mouseScreenPos);
-
-            var direction = (new Vector3(ray.origin.x, ray.origin.y) - lastMousePosition).normalized;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, fruitMask | bombMask)) 
-            {
-                var hitObject = hit.rigidbody.gameObject;
-                CollisionEvent(hitObject, direction);
-            };
-
-            var pos = ray.origin;
-            pos.z = 0;
-            mouseWorldPosition.z = 0f;
-
-            _trailRenderer.transform.position = mouseWorldPosition;
-            lastMousePosition = pos;
-        }
-        else
-        {
-            _trailRenderer.enabled = false;
-        }
+        //if (Input.GetMouseButton(1)) 
+        //{
+        //    //Click(Input.mousePosition);
+        //}
+        //else
+        //{
+        //    //_trailRenderer.enabled = false;
+        //}
     }
 
     public void CollisionEvent(GameObject gameObject, Vector3 sliceDirection)
@@ -79,5 +91,10 @@ public class TouchManager : MonoBehaviour
         var bomb = gameObject.GetComponentInParent<Bomb>();
         bomb.TriggerBomb();
         OnBombTouch?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        _inputManager.OnClick -= () => Click(_inputManager.MousePosition);
     }
 }

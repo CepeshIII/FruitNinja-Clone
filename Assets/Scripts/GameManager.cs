@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (Application.isMobilePlatform)
+        {
+            QualitySettings.vSyncCount = 0; 
+            Application.targetFrameRate = 60;
+        }
         Unpaused();
     }
 
