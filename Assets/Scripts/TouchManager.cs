@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+
 
 public delegate void TouchManagerEvent();
 
@@ -6,38 +10,62 @@ public class TouchManager : MonoBehaviour
 {
     public TouchManagerEvent OnBombTouch;
 
+    [SerializeField] private List<GameObject> _fingers;
     [SerializeField] private TrailRenderer _trailRenderer;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private float _sliceForce = 100f;
     [SerializeField] private float _sliceTorque = 100f;
-
+    [SerializeField] private int _maxCountOfFingers = 10;
+    [SerializeField] private SoundManager soundManager;
     [SerializeField] private LayerMask fruitMask;
     [SerializeField] private LayerMask bombMask;
+
     private RaycastHit hit;
     private Vector3 lastMousePosition;
 
+    Camera Camera => Camera.main;
+
+
     private void OnEnable()
     {
+        soundManager = (SoundManager)SoundManager.Instance;
+
         _inputManager = GameObject
             .FindGameObjectWithTag("InputManager")
             .GetComponent<InputManager>();
-        _inputManager.OnClick += () => Click(_inputManager.MousePosition);
+        _inputManager.OnTouchStart += StartTouch;
+        _inputManager.OnTouchMove += MoveTouch;
+        _inputManager.OnTouchEnd += EndTouch;
+
+        InitializeFingers();
     }
 
-
-    public void Click(Vector2 position)
+    public void InitializeFingers()
     {
-        _trailRenderer.enabled = true;
+        _fingers = new(_maxCountOfFingers);
 
-        Camera camera = Camera.main;
+        for (int i = 0; i < _maxCountOfFingers; i++) 
+        {
+            var fingerObject = Instantiate(_trailRenderer.gameObject, this.transform);
+            fingerObject.name = $"Finger: {i}";
+            _fingers.Add(fingerObject);
+        }
+    }
+
+    private void MoveTouch(Vector2 position, Vector2 delta, int fingerId)
+    {
+        if (fingerId >= _fingers.Count) return;
+        var finger = _fingers[fingerId];
+        finger.SetActive(true);
+
 
         Vector3 clickPosition = position;
-        clickPosition.z = -camera.transform.position.z;
+        clickPosition.z = -Camera.transform.position.z;
 
-        Ray ray = camera.ScreenPointToRay(clickPosition);
-        var mouseWorldPosition = camera.ScreenToWorldPoint(clickPosition);
+        Ray ray = Camera.ScreenPointToRay(clickPosition);
+        var mouseWorldPosition = Camera.ScreenToWorldPoint(clickPosition);
 
-        var direction = (new Vector3(ray.origin.x, ray.origin.y) - lastMousePosition).normalized;
+        var direction = (delta).normalized;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, fruitMask | bombMask))
         {
@@ -49,23 +77,28 @@ public class TouchManager : MonoBehaviour
         pos.z = 0;
         mouseWorldPosition.z = 0f;
 
-        _trailRenderer.transform.position = mouseWorldPosition;
+        finger.transform.position = mouseWorldPosition;
         lastMousePosition = pos;
-        _trailRenderer.enabled = false;
+        soundManager.PlayWhooshSound();
     }
 
-
-    void Update()
+    private void StartTouch(Vector2 position, Vector2 delta, int fingerId)
     {
+        if (fingerId >= _fingers.Count) return;
+        var finger = _fingers[fingerId];
 
-        //if (Input.GetMouseButton(1)) 
-        //{
-        //    //Click(Input.mousePosition);
-        //}
-        //else
-        //{
-        //    //_trailRenderer.enabled = false;
-        //}
+        Vector3 clickPosition = position;
+        clickPosition.z = -Camera.transform.position.z;
+
+        var mouseWorldPosition = Camera.ScreenToWorldPoint(clickPosition);
+        finger.transform.position = mouseWorldPosition;
+    }
+
+    private void EndTouch(Vector2 position, Vector2 delta, int fingerId)
+    {
+        if (fingerId >= _fingers.Count) return;
+        var finger = _fingers[fingerId];
+        finger.SetActive(false);
     }
 
     public void CollisionEvent(GameObject gameObject, Vector3 sliceDirection)
@@ -93,8 +126,21 @@ public class TouchManager : MonoBehaviour
         OnBombTouch?.Invoke();
     }
 
+    private void DeleteFingers()
+    {
+        foreach (var finger in _fingers) 
+        { 
+            if (finger != null)
+                Destroy(finger);    
+        }
+        _fingers.Clear();   
+    }
+
     private void OnDisable()
     {
-        _inputManager.OnClick -= () => Click(_inputManager.MousePosition);
+        DeleteFingers();
+
+        _inputManager.OnTouchStart -= StartTouch;
+        _inputManager.OnTouchStart -= MoveTouch;
     }
 }

@@ -1,71 +1,44 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Windows;
 using EnhancedTouch =  UnityEngine.InputSystem.EnhancedTouch;
 
-public delegate void InputManagerEvent();
+public delegate void InputManagerTouchEvent(Vector2 position, Vector2 delta, int fingerId);
 
 public class InputManager : MonoBehaviour
 {
-    private Vector2 mousePosition = Vector2.zero;
-    private InputSystem_Actions _Input = null;
-    
     // Initialize with empty delegate to prevent null reference
-    public InputManagerEvent OnClick = delegate { };
+    public InputManagerTouchEvent OnTouchStart = delegate { };
+    public InputManagerTouchEvent OnTouchMove = delegate { };
+    public InputManagerTouchEvent OnTouchEnd = delegate { };
 
-    public Vector2 MousePosition => mousePosition;
 
     private void OnEnable()
     {
-        _Input = new();
-        _Input.Player.Enable();
-
-        //_Input.Player.Click.performed += HandleClick;
-        //_Input.Player.MousePositon.performed += HandleMousePosition;
-        //_Input.Player.TouchPress.performed += HandleClick;
-        _Input.Player.TouchPosition.performed += HandleMousePosition;
+        EnhancedTouchSupport.Enable();
     }
 
-    private void HandleClick(InputAction.CallbackContext context)
+    void Update()
     {
-        OnClick?.Invoke(); // Safe invocation
-    }
-
-    private void HandleMousePosition(InputAction.CallbackContext context)
-    {
-        Vector2 position = context.ReadValue<Vector2>();
-        mousePosition = position;
+        foreach (EnhancedTouch.Touch touch in EnhancedTouch.Touch.activeTouches)
+        {
+            if(touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+            {
+                OnTouchStart?.Invoke(touch.startScreenPosition, touch.delta, touch.finger.index);
+            }
+            else if (touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
+            {
+                OnTouchMove?.Invoke(touch.screenPosition, touch.delta, touch.finger.index);
+            } else if(touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+            {
+                OnTouchEnd?.Invoke(touch.screenPosition, touch.delta, touch.finger.index);
+            }
+        }
     }
 
     private void OnDisable()
     {
-        //_Input.Player.Click.started -= HandleClick;
-        //_Input.Player.MousePositon.started -= HandleMousePosition;
-        _Input.Player.TouchPosition.performed -= HandleMousePosition;
-        //_Input.Player.TouchPress.performed -= HandleClick;
-
-        _Input.Player.Disable();
-
+        EnhancedTouchSupport.Disable();
     }
-
-    public void Update()
-    {
-        //foreach(EnhancedTouch.Touch touch in EnhancedTouch.Touch.activeTouches)
-        //{
-        //    if(touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
-        //    {
-        //        OnClick.Invoke();
-        //    }
-        //}
-
-        //if (_Input.Player.TouchPress.WasPerformedThisFrame()) 
-        //{
-            if (_Input.Player.TouchPress.IsPressed())
-            {
-                OnClick.Invoke();
-            }
-        //}
-
-    }
-
 }
