@@ -1,11 +1,17 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField] int currentScore = 0;
+    [SerializeField] int missFruitScore = 0;
+
     [SerializeField] TextMeshProUGUI scoreLayout;
     [SerializeField] TextMeshProUGUI bestScoreLayout;
+    [SerializeField] MissFruitDisplayer missFruitShower;
+
+    private int maxMissFruitCount = 3;
 
     private void Awake()
     {
@@ -17,6 +23,17 @@ public class ScoreManager : Singleton<ScoreManager>
         currentScore += count;
         CheckScoreRecord();
         UpdateScore();
+    }
+
+    public void IncreaseMissFruitScore(int count)
+    {
+        missFruitScore += count;
+        UpdateMissFruitScore();
+    }
+
+    private void UpdateMissFruitScore()
+    {
+        missFruitShower.Display(maxMissFruitCount, missFruitScore);
     }
 
     private void OnDisable()
@@ -38,5 +55,10 @@ public class ScoreManager : Singleton<ScoreManager>
             scoreLayout.text = "SCORE: " + currentScore.ToString();
         if (bestScoreLayout != null)
             bestScoreLayout.text = "BEST SCORE: " + PlayerPrefs.GetInt("BestScore").ToString();
+    }
+
+    internal bool CheckIfGameOverByLoseFruit()
+    {
+        return missFruitScore > maxMissFruitCount;
     }
 }

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BombManager _bombManager;
     [SerializeField] private CacheObjectHolder _cacheObjectHolder;
     [SerializeField] private SceneLoader _sceneLoader;
+    [SerializeField] private ScoreManager _scoreManager;
 
     private void OnEnable()
     {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
         _bombManager = GameObject.FindGameObjectWithTag("BombManager").GetComponent<BombManager>();
         _cacheObjectHolder = (CacheObjectHolder)CacheObjectHolder.Instance;
         _sceneLoader = (SceneLoader)SceneLoader.Instance;
+        _scoreManager = (ScoreManager)ScoreManager.Instance;
 
         _touchManager.OnBombTouch += BombTouch;
         _fruitManager.OnMissFruit += MissFruit;
@@ -33,12 +35,22 @@ public class GameManager : MonoBehaviour
 
     public void MissFruit()
     {
+        _scoreManager.IncreaseMissFruitScore(1);
+        if (_scoreManager.CheckIfGameOverByLoseFruit())
+        {
+            GameOver();
+        }
         Debug.Log("Game over: Miss Fruit");
     }
 
     public void BombTouch()
     {
         Debug.Log("Game over: BombTouch");
+        GameOver();
+    }
+
+    private void GameOver()
+    {
         _sceneLoader.LoadMenuScene();
         Pause();
     }

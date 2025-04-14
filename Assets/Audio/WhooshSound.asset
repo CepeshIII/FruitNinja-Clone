@@ -50,16 +50,6 @@ AudioContainerElement:
   m_AudioClip: {fileID: 8300000, guid: 5374e58319d2f6d4782594749d380223, type: 3}
   m_Volume: 0
   m_Enabled: 1
---- !u!1233149941 &796937426470155184
-AudioContainerElement:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: whoosh-6316_{796937426470155184}
-  m_AudioClip: {fileID: 8300000, guid: bc0f334d054c18b4bade1c8323d32030, type: 3}
-  m_Volume: 0
-  m_Enabled: 1
 --- !u!1233149941 &2654716578362187455
 AudioContainerElement:
   m_ObjectHideFlags: 1
@@ -103,7 +93,6 @@ AudioRandomContainer:
   - {fileID: -8992281239786070272}
   - {fileID: -5700715497648045254}
   - {fileID: -4893705938646090474}
-  - {fileID: 796937426470155184}
   m_AvoidRepeatingLast: 1
   m_PlaybackMode: 1
   m_TriggerMode: 1

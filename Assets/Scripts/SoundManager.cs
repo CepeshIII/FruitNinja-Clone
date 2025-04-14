@@ -11,26 +11,29 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private AudioResource fruitSliceAudioResource;
     [SerializeField] private AudioResource bombExplosionAudioResource;
     [SerializeField] private AudioResource WhooshAudioResource;
+    [SerializeField] private AudioResource TossAudioResource;
 
     // Dictionary to store lists of AudioSources associated with each AudioResource
     private Dictionary<AudioResource, List<AudioSource>> _initializedAudioSources = new();
 
-    // Plays the fruit slice sound at Vector3.zero
     public void PlayFruitSound()
     {
         Play(fruitSliceAudioResource, Vector3.zero);
     }
 
-    // Plays the bomb explosion sound at Vector3.zero
     public void PlayBombExplosionSound()
     {
         Play(bombExplosionAudioResource, Vector3.zero);
     }
 
-    // Plays the whoosh sound at Vector3.zero
     public void PlayWhooshSound()
     {
         Play(WhooshAudioResource, Vector3.zero, false);
+    }
+
+    public void PlayTossSound()
+    {
+        Play(TossAudioResource, Vector3.zero, false);
     }
 
     /// <summary>

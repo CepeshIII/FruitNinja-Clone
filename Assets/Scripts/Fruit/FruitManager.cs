@@ -58,6 +58,7 @@ public class FruitManager: MonoBehaviour
         fruit.OnWholeFruitFall += MissFruit;
         fruit.OnFruitSlice += SliceFruit;
 
+        soundManager.PlayTossSound();
         thrower.Throw(fruit.WholeFruit.Rigidbody);
     }
 
