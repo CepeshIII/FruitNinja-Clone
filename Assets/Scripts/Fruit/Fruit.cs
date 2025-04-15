@@ -31,7 +31,8 @@ public class Fruit : MonoBehaviour, ICacheObject
     {
         if (isSliced) return;
 
-        _particleManager.CreateParticles(_wholeFruit.transform.position);
+        var position = _wholeFruit.transform.position;
+        _particleManager.CreateParticles(position);
         _wholeFruit.Deactivate();
         _slicedFruit.Slice(_wholeFruit.transform.position, direction, sliceForce, sliceTorque);
         isSliced = true;

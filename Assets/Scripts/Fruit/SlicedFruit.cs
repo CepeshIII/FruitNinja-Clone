@@ -5,6 +5,18 @@ public class SlicedFruit: MonoBehaviour
     [SerializeField] private Rigidbody _leftSlice;
     [SerializeField] private Rigidbody _rightSlice;
 
+
+    // AdditionalForce for sliced fruit faster fell
+    private float constantAdditionalForce = -3f;
+
+
+    private void LateUpdate()
+    {
+        var force = Vector3.up * constantAdditionalForce;
+        _leftSlice.AddForce(force);
+        _rightSlice.AddForce(force);
+    }
+
     public void Slice(Vector3 newPosition, Vector3 direction, float force, float torque)
     {
         gameObject.SetActive(true);

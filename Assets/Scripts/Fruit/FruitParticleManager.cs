@@ -1,11 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.ProbeAdjustmentVolume;
 
 public class FruitParticleManager: MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private Color _color;
+    [SerializeField] private float zPosition = 0.5f;
 
     private void OnEnable()
     {
@@ -14,6 +14,7 @@ public class FruitParticleManager: MonoBehaviour
 
     public void CreateParticles(Vector3 position)
     {
+        position.z = zPosition;
         var mainModule = _particleSystem.main;
         mainModule.startColor = _color;
 
