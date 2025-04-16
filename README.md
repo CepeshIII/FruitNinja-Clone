@@ -72,7 +72,9 @@ In this Fruit Ninja clone, the player slices flying low-poly fruits while avoidi
 
     Make sure URP and New Input System are installed and active.
 
-    Click Play in the Unity Editor (works with mouse or touch input).
+    Enable touch simulation by toggling "Simulate Touch Input From Mouse or Pen" on in the "Options" dropdown of the Input Debugger(for works with mouse input).
+    
+    Click Play in the Unity Editor 
 
 # 📸 Screenshots
 ![Screenshot_20250415-115927](https://github.com/user-attachments/assets/62a9b396-b1fa-4169-9071-5c32a257fac7)
