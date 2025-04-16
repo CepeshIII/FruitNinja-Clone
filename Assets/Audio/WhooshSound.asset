@@ -40,26 +40,6 @@ AudioContainerElement:
   m_AudioClip: {fileID: 8300000, guid: 82ba1ba6fb3524840bb032778e00e209, type: 3}
   m_Volume: 0
   m_Enabled: 1
---- !u!1233149941 &-2887849454545984973
-AudioContainerElement:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: speedy-whoosh-229316_{-2887849454545984973}
-  m_AudioClip: {fileID: 8300000, guid: 5374e58319d2f6d4782594749d380223, type: 3}
-  m_Volume: 0
-  m_Enabled: 1
---- !u!1233149941 &2654716578362187455
-AudioContainerElement:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: clean-fast-swooshaiff-14784_{2654716578362187455}
-  m_AudioClip: {fileID: 8300000, guid: 5c6f23030b8c91548923b704a053d1d5, type: 3}
-  m_Volume: 0
-  m_Enabled: 1
 --- !u!1233149941 &4973386512933880332
 AudioContainerElement:
   m_ObjectHideFlags: 1
@@ -68,6 +48,16 @@ AudioContainerElement:
   m_PrefabAsset: {fileID: 0}
   m_Name: movement-swipe-whoosh-1-186575_{4973386512933880332}
   m_AudioClip: {fileID: 8300000, guid: 1b5317b4d32145d4abd10eb38d7ea32e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5642625600105551157
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: clean-fast-swooshaiff-14784_{5642625600105551157}
+  m_AudioClip: {fileID: 8300000, guid: 5c6f23030b8c91548923b704a053d1d5, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1307931743 &6418180475301049370
@@ -82,23 +72,22 @@ AudioRandomContainer:
   m_AutomaticTriggerTime: 0
   m_LoopCount: 1
   m_VolumeRandomizationRange: {x: 0, y: 0}
-  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -239.00414, y: 1200}
   m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
   m_LoopCountRandomizationRange: {x: 0, y: 0}
   m_Elements:
-  - {fileID: 2654716578362187455}
   - {fileID: 4973386512933880332}
   - {fileID: -8097550344274438205}
-  - {fileID: -2887849454545984973}
   - {fileID: -8992281239786070272}
   - {fileID: -5700715497648045254}
   - {fileID: -4893705938646090474}
+  - {fileID: 5642625600105551157}
   m_AvoidRepeatingLast: 1
   m_PlaybackMode: 1
   m_TriggerMode: 1
   m_AutomaticTriggerMode: 1
   m_LoopMode: 1
   m_VolumeRandomizationEnabled: 0
-  m_PitchRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
   m_AutomaticTriggerTimeRandomizationEnabled: 0
   m_LoopCountRandomizationEnabled: 0

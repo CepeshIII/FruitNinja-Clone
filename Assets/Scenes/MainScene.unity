@@ -461,7 +461,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.3
+  m_fontSize: 25.15
   m_fontSizeBase: 153.3
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -773,6 +773,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosses: []
   crossPrefab: {fileID: 8243298225737866456, guid: 572e8af692a0ca14e85f5c4a2b370782, type: 3}
+--- !u!1 &727174332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727174335}
+  - component: {fileID: 727174334}
+  - component: {fileID: 727174333}
+  m_Layer: 0
+  m_Name: AddModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &727174333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727174332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886d0591e94151b468d865483bd14473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidAdUnitId: Interstitial_Android
+  _iOsAdUnitId: Interstitial_iOS
+--- !u!114 &727174334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727174332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462ab9a3ca168e844a6bc693b2984b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 5834761
+  _iOSGameId: 5834760
+  _testMode: 0
+--- !u!4 &727174335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727174332}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.4805822, y: -8.334926, z: -0.66751856}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &752162824
 GameObject:
   m_ObjectHideFlags: 0
@@ -6629,8 +6691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d07fef6b079d24987fa3e924b14c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _physicsSettings: {fileID: 0}
-  _displaySettings: {fileID: 0}
 --- !u!1 &1786619186
 GameObject:
   m_ObjectHideFlags: 0
@@ -6733,9 +6793,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitSliceAudioResource: {fileID: 6418180475301049370, guid: 487879859b5129746af8ab755efe466d, type: 2}
+  fruitSliceMixerGroup: {fileID: -7565086988804496920, guid: f78594809d6256e4e9fb469a0467a2cc, type: 2}
   bombExplosionAudioResource: {fileID: 6418180475301049370, guid: 0558090babeb7c64a9136936543d4948, type: 2}
+  bombExplosionMixerGroup: {fileID: 553646058507179653, guid: f78594809d6256e4e9fb469a0467a2cc, type: 2}
   WhooshAudioResource: {fileID: 6418180475301049370, guid: e229dba6f1389a04783a797341722644, type: 2}
+  WhooshAudioMixerGroup: {fileID: -3958566062808417654, guid: f78594809d6256e4e9fb469a0467a2cc, type: 2}
   TossAudioResource: {fileID: 6418180475301049370, guid: f8bad37f4d9793f4f85bd03f8add6a6c, type: 2}
+  TossAudioMixerGroup: {fileID: -778583935535111953, guid: f78594809d6256e4e9fb469a0467a2cc, type: 2}
 --- !u!1 &1939775011
 GameObject:
   m_ObjectHideFlags: 0
@@ -7003,7 +7067,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52.2
+  m_fontSize: 38.3
   m_fontSizeBase: 153.3
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7249,3 +7313,4 @@ SceneRoots:
   - {fileID: 1208196623}
   - {fileID: 1410691338}
   - {fileID: 752162828}
+  - {fileID: 727174335}
